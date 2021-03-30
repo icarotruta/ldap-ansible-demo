@@ -1,0 +1,125 @@
+dn: dc=ldap-teste,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: ldap-teste
+dc: ldap-teste
+structuralObjectClass: organization
+entryUUID: 17a9a794-24ee-103b-9103-8db16dac8a28
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152051Z
+entryCSN: 20210329152051.873904Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152051Z
+
+dn: cn=admin,dc=ldap-teste,dc=com
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword:: e1NTSEF9SXVZZWRiOS9oRWRuV3ZtMVczZU5YV0hIb0plWEhmWXg=
+structuralObjectClass: organizationalRole
+entryUUID: 17aacd0e-24ee-103b-9104-8db16dac8a28
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152051Z
+entryCSN: 20210329152051.881462Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152051Z
+
+dn: cn=2000,dc=ldap-teste,dc=com
+cn: 2000
+objectClass: posixGroup
+objectClass: top
+gidNumber: 2000
+structuralObjectClass: posixGroup
+entryUUID: efc132a0-24ee-103b-8902-312f6b5f82d0
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152654Z
+entryCSN: 20210329152654.416099Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152654Z
+
+dn: cn=User 1,dc=ldap-teste,dc=com
+cn: User 1
+homeDirectory: /home/users/user1
+sn: 1
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+userPassword:: e01ENX1nbnpMRHVxS2NHeE1OS0Zva2ZoT2V3PT0=
+uid: user1
+gidNumber: 2000
+givenName: User1
+uidNumber: 1101
+loginShell: /bin/bash
+structuralObjectClass: inetOrgPerson
+entryUUID: efc8fc56-24ee-103b-8903-312f6b5f82d0
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152654Z
+entryCSN: 20210329152654.467143Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152654Z
+
+dn: cn=User 2,dc=ldap-teste,dc=com
+cn: User 2
+gidNumber: 2000
+givenName: User2
+homeDirectory: /home/users/user2
+loginShell: /bin/bash
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+userPassword:: e01ENX1BYy9OVDJ1SGNQNi90QXk1Qm5GWUlnPT0=
+sn: 2
+uidNumber: 1102
+uid: user2
+structuralObjectClass: inetOrgPerson
+entryUUID: efca9f2a-24ee-103b-8904-312f6b5f82d0
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152654Z
+entryCSN: 20210329152654.477863Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152654Z
+
+dn: cn=User 3,dc=ldap-teste,dc=com
+cn: User 3
+gidNumber: 2000
+givenName: User3
+homeDirectory: /home/users/user3
+loginShell: /bin/bash
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+userPassword:: e01ENX1rbGJ4ZCtDZUh6OXZoZ3FHTnpzNnJRPT0=
+sn: 3
+uidNumber: 1103
+uid: user3
+structuralObjectClass: inetOrgPerson
+entryUUID: efcc2016-24ee-103b-8905-312f6b5f82d0
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152654Z
+entryCSN: 20210329152654.487715Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152654Z
+
+dn: cn=User 4,dc=ldap-teste,dc=com
+cn: User 4
+homeDirectory: /home/users/user4
+sn: 4
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+userPassword:: e01ENX1nbnpMRHVxS2NHeE1OS0Zva2ZoT2V3PT0=
+uid: user4
+gidNumber: 2000
+givenName: User4
+uidNumber: 1104
+loginShell: /bin/bash
+structuralObjectClass: inetOrgPerson
+entryUUID: 29d03cac-24ef-103b-8906-312f6b5f82d0
+creatorsName: cn=admin,dc=ldap-teste,dc=com
+createTimestamp: 20210329152831Z
+entryCSN: 20210329152831.822494Z#000000#000#000000
+modifiersName: cn=admin,dc=ldap-teste,dc=com
+modifyTimestamp: 20210329152831Z
+

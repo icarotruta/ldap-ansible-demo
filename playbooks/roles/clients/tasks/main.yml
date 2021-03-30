@@ -1,0 +1,50 @@
+- name: Install ldap - libnss-ldap
+  shell: DEBIAN_FRONTEND=noninteractive apt install -y libnss-ldap
+
+- name: Install ldap client for autentication
+  shell: DEBIAN_FRONTEND=noninteractive apt install -y ldap-auth-client
+
+- name: Install ldap libpam
+  shell: DEBIAN_FRONTEND=noninteractive apt install -y libpam-ldapd
+
+- name: Install ldap - libnss-ldapd - for ubuntu 18 or above
+  shell: DEBIAN_FRONTEND=noninteractive apt install -y libnss-ldapd
+
+- name: copy config ldap file
+  copy:
+    src: ldap-base.conf
+    dest: /opt/ldap-base.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy config nslcd file
+  copy:
+    src: nslcd-base.conf
+    dest: /opt/nslcd-base.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy config nsswitch file
+  copy:
+    src: nsswitch-base.conf
+    dest: /opt/nsswitch-base.conf
+    owner: root
+    group: root
+    mode: 0644	
+
+- name: begin initial config - changing ldap config
+  shell: sudo cat /opt/ldap-base.conf > /etc/ldap.conf
+
+- name: begin initial config - changing nslcd config
+  shell: sudo cat /opt/nslcd-base.conf > /etc/nslcd.conf
+  
+- name: begin initial config - changing nslcd config
+  shell: sudo cat /opt/nsswitch-base.conf > /etc/nsswitch.conf
+
+- name: pam-auth-update
+  shell: pam-auth-update --enable mkhomedir
+
+- name: reboot client machine to validate the configuration
+  reboot:

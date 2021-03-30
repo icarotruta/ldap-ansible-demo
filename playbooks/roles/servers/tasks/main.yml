@@ -1,0 +1,83 @@
+- name: install slapd  
+  shell: sudo DEBIAN_FRONTEND=noninteractive apt install slapd -y
+
+- name: install ldap-utils
+  shell: sudo apt install ldap-utils -y
+
+- name: copy config ldap file
+  copy:
+    src: config.ldif
+    dest: /opt/config.ldif
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy data ldap file
+  copy:
+    src: data.ldif
+    dest: /opt/data.ldif
+    owner: root
+    group: root
+    mode: 0644
+- name: copy base passwd file
+  copy:
+    src: passwd.txt
+    dest: /opt/passwd.txt
+    owner: root
+    group: root
+    mode: 0640
+
+- name: Start ldap server
+  service:
+    name: slapd.service
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Retrieve ldap server configuration
+  command: "ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=config"
+  register: ldap_config
+  changed_when: "False"
+  become: yes
+
+- name: begin initial config stoping slapd.service
+  service:
+    name: slapd.service
+    state: stopped
+    enabled: yes
+  become: yes
+
+- name: begin initial config removing default schemas and entries - config
+  shell: sudo mv /etc/ldap/slapd.d /etc/ldap/slapd.d.`date '+%Y-%m-%d'`
+
+- name: begin initial config removing default schemas and entries - data
+  shell: sudo mv /var/lib/ldap /var/lib/ldap`date '+%Y-%m-%d'`
+
+- name: begin initial config add new slapd.d directory
+  shell: sudo mkdir /etc/ldap/slapd.d
+
+- name: begin initial config add new /var/lib/ldap directory
+  shell: sudo mkdir /var/lib/ldap
+
+- name: begin initial config add default config
+  shell: slapadd -n 0 -F /etc/ldap/slapd.d -l config.ldif
+  args:
+    chdir: /opt/
+
+- name: begin initial config add default data
+  shell: slapadd -n 1 -F /etc/ldap/slapd.d -l data.ldif
+  args:
+    chdir: /opt/
+
+- name: begin initial config changing owner's permition directories - config
+  shell: chown -R openldap:openldap /etc/ldap/slapd.d 
+
+- name: begin initial config changing owner's permition directories - data
+  shell: chown -R openldap:openldap /var/lib/ldap
+
+- name: begin initial config starting back slapd.service
+  service:
+    name: slapd.service
+    state: started
+    enabled: yes
+  become: yes

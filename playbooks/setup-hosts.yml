@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+  - env_vars
+  gather_facts: true
+  remote_user: ubuntu
+  pre_tasks:
+    - name: update ubuntu repo
+      shell: apt update -y
+
+- hosts: servers
+  become: true
+  remote_user: ubuntu
+  roles:
+    - servers
+
+- hosts: clients
+  become: true
+  remote_user: ubuntu
+  roles:
+    - clients
