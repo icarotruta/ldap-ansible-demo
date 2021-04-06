@@ -1,2 +1,3 @@
 ansible.cfg
 hosts
+playbooks/ec2_env_vars

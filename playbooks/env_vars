@@ -1,0 +1,9 @@
+key_name: <key name, needs to be created at aws>
+ansible_ssh_private_key: "/path/to/key.pem"
+instance_type: <instance type ex.: t2.small>
+security_group: <security group NAME>
+image: <AN IMAGE ID AMI-somehash>
+region: <REGION ex.: us-east-2>
+vpc_subnet_id: <SUBNET ID>
+ec2_access_key: <IAM USER ACCESS KEY> 
+ec2_secret_key: <IAM USER SECRET ACCESS KEY>
