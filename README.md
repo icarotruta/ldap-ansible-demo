@@ -2,7 +2,8 @@
 
 ## 1. What is it?
 
-xpto-for-the-win
+This is a demonstration how to automate a simple (and single) LDAP server deployment and also integrate another instance as a client.
+This playbook can be used to deploy both on bare metal machines and cloud-based instances such as Nova Instances (Openstack) and EC2 instances (AWS).
 
 ## 2. Install Ansible
 
@@ -13,9 +14,12 @@ sudo apt update
 sudo apt install software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
+#if you are going to use the aws modules you will need to install boto and boto3
+sudo apt install -y boto boto3
 ```
 
 For more details on the Ansible installation, check this [link](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu).
+As for the EC2 instances manipulation you can check this [link](https://docs.ansible.com/ansible/2.3/ec2_module.html)
 
 ## 3. Setup the required configuration
 
@@ -48,7 +52,7 @@ private_key_file = /path/to/file
 After the changes are made, you can run the playbook as it shows below:
 
 ```ini
-ansible-playbook setup-hosts.yml -b
+ansible-playbook services-deploy.yml -b
 ```
 
 Alternatively, you can add the parameter -vvv to better understandment of the "behind the scenes".
@@ -61,3 +65,42 @@ To check if the instalation worked as expected, try to access a client machine a
 getent passwd
 ```
 
+
+## 6. Running (wild) on AWS EC2 instances
+
+First we need to prepare some of the infrastructure at the AWS Console, such as:
+
+* One IAM user with ec2 privilegies;
+* A ssh key for login after the deployment;
+* A VPC;
+* A security group with the TCP ports 22, 389(this one can be only for the subnet hosts itself)  accepting inbound traffics.
+
+Now, we can update the env_vars file with the necessary values and run the e2-deploy playbook:
+
+```ini
+ansible-playbook ec2-infra-deploy.yml
+```
+
+After the playbook finish, you can check the instances both at the AWS console and accessing via ssh with the keypair selected.
+
+### Using the Post EC2 Deployment script
+
+On the post-deployment folder, you can run the change-hosts.sh script to update the hosts file and also change the ldap server IP address. To do this, follow this steps:
+```ìni
+cd post-ec2-scripts
+chmod +x change-hosts.sh
+./change-hosts.sh <server public ip> <server subnet ip> <client public ip>
+#if you forget the args, just check again here  
+```
+
+After this, just run the conventional playbook!
+
+```ini
+ansible-playbook services-deploy.yml -b
+```
+
+
+## Disclaimer
+
+This demo is for testing use only, it may not work properly on a production environment.
+For this demo, the operational system used was the Ubuntu 20.04 server both at Openstack an AWS.
